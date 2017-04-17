@@ -1,0 +1,236 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="height:400px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main5" style="height:80px;border:1px solid #ccc;padding:10px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影信息表格进行处理，对电影的内容类型进行统计，得到图中各个电影内容类型所占份额，由图可得，电影的内容共有21种类型，数据较为集中，好莱坞最获益的电影内容主要是Monster Force，有13电影，占到13.00%，其次是喜剧和爱情剧，二者加起来有21部电影，占到21%，Tragedy只有1部很少；有5部电影这项数据不存在，这也说明了当下美国和世界的主流文化，Monster Force大受人们欢迎。
+    </div>
+    <div id="main4" style="height:400px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main6" style="height:80px;border:1px solid #ccc;padding:10px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影信息表格进行处理，对好莱坞最获益的电影的主要上映方进行统计，得到好莱坞电影上映方的份额，由图可得，好莱坞电影的上映方共有29个，数据很分散，好莱坞最获益的电影的上映方是Independent，有19部电影，占到19.19%，其次是Warner Bros，有13部电影，占到13.13%，最少的只有1部；Disney只有4部占4.04%；有1部电影这项数据不存在。这说明了好莱坞电影上映方也是各自分得一部分市场，没有一家垄断。
+    </div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="../../echart/echarts.js"></script>
+    
+    <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '../../echart'
+        }
+    });
+    
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/pie',
+	    'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            //--- 折柱 ---
+
+           
+            var option = {
+    title : {
+        text: 'Most Profitable Hollywood Stories - US 2011',
+        subtext: 'Lead Studio',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['Independent','Lionsgate','Vertigo Entertainment','Relativity Media','Weinstein Company','Warner Bros','Aardman Animations','CBS Films','Disney','Pixar','20th Century Fox','Sony','Universal','Miramax Films','Morgan Creek Productions','Reliance Entertainment','New Line Cinema','Spyglass Entertainment','DreamWorks','Village Roadshow Pictures','Paramount','Regency Enterprises','Happy Madison','Virgin','Columbia','The Weinstein Company','DreamWorks Pictures','Summit Entertainment','None','Legendary Pictures'
+             ]
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'Lead Studio',
+            type:'pie',
+            radius : '55%',
+            center: ['70%', '60%'],
+            data:[
+                {value:19, name:'Independent'},
+                {value:3, name:'Lionsgate'},
+                {value:1, name:'Vertigo Entertainment'},
+                {value:7, name:'Relativity Media'},
+                {value:5, name:'Weinstein Company'},
+                {value:13, name:'Warner Bros'},
+                {value:1, name:'Aardman Animations'},
+                {value:1, name:'CBS Films'},
+                {value:4, name:'Disney'},
+                {value:1, name:'Pixar'},
+                {value:6, name:'20th Century Fox'},
+                {value:6, name:'Sony'},
+                {value:5, name:'Universal'},
+                {value:1, name:'Miramax Films'},
+                {value:1, name:'Morgan Creek Productions'},
+                {value:1, name:'Reliance Entertainment'},
+                {value:1, name:'New Line Cinema'},
+                {value:2, name:'Spyglass Entertainment'},
+                {value:4, name:'DreamWorks'},
+                {value:1, name:'Village Roadshow Pictures'},
+                {value:5, name:'Paramount'},
+                {value:1, name:'Regency Enterprises'},
+                {value:2, name:'Happy Madison'},
+                {value:1, name:'Virgin'},
+                {value:1, name:'Columbia'},
+                {value:2, name:'The Weinstein Company'},
+                {value:1, name:'DreamWorks Pictures'},
+                {value:1, name:'Summit Entertainment'},
+                {value:1, name:'None'},
+                {value:1, name:'Legendary Pictures'}
+            ]
+        }
+    ]
+};
+var myChart = ec.init(document.getElementById('main'));
+// 为echarts对象加载数据 
+myChart.setOption(option); 
+            
+           
+
+
+var option4 = {
+    title : {
+        text: 'Most Profitable Hollywood Stories - US 2011',
+        subtext: 'Story',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['Comedy', 'Discovery', 'Love','Maturation', 'Tragedy','Temptation','Monster Force', 'Sacrifice','Journey and Return','Metamorphosis','Rivalry','Fish Out Of Water','Revenge','Quest','The Riddle', 'Wretched Excess','Underdog','Pursuit', 'Escape','Rescue','Transformation','None']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'Story',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:10, name:'Comedy'},
+                {value:5, name:'Discovery'},
+                {value:11, name:'Love'},
+                {value:3, name:'Maturation'},
+                {value:1, name:'Tragedy'},
+                {value:3, name:'Temptation'},
+                {value:13, name:'Monster Force'},
+                {value:2, name:'Sacrifice'},
+                {value:2, name:'Journey and Return'},
+                {value:3, name:'Metamorphosis'},
+                {value:7, name:'Rivalry'},
+                {value:3, name:'Fish Out Of Water'},
+                {value:4, name:'Revenge'},
+                {value:9, name:'Quest'},
+                {value:4, name:'The Riddle'},
+                {value:3, name:'Wretched Excess'},
+                {value:3, name:'Underdog'},
+                {value:2, name:'Pursuit'},
+                {value:3, name:'Escape'},
+                {value:2, name:'Rescue'},
+                {value:2, name:'Transformation'},
+                {value:5, name:'None'}
+            ]
+        }
+    ]
+};
+var myChart4 = ec.init(document.getElementById('main4'));
+myChart4.setOption(option4);
+
+
+var ecConfig = require('echarts/config');
+myChart.on(ecConfig.EVENT.MAP_SELECTED, function (param){
+    var selected = param.selected;
+    var mapSeries = option.series[0];
+    var data = [];
+    var legendData = [];
+    var name;
+    for (var p = 0, len = mapSeries.data.length; p < len; p++) {
+        name = mapSeries.data[p].name;
+        //mapSeries.data[p].selected = selected[name];
+        if (selected[name]) {
+            data.push({
+                name: name,
+                value: mapSeries.data[p].value
+            });
+            legendData.push(name);
+        }
+    }
+    option.legend.data = legendData;
+    option.series[1].data = data;
+    myChart.setOption(option, true);
+});
+        
+                    
+        }
+    );
+    </script>
+</body>
+</html>

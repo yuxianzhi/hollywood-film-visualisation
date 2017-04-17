@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+
+svg {
+	width: 100%;
+	height: 100%;
+}
+
+path.slice{
+	stroke-width:2px;
+}
+
+polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+}
+
+</style>
+<title>
+The analysis of Most Profitable Hollywood Stories - US 2011
+</title>
+<head>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+The analysis of Most Profitable Hollywood Stories - US 2011</br>
+</head>
+<body>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button class="aa">Lead Studio</button>
+<button class="bb">Story</button>
+<button class="cc">Genre</button>
+
+<script src="../../d3/d3.v3.min.js"></script>
+<script>
+
+var svg = d3.select("body")
+	.append("svg")
+	.append("g")
+
+svg.append("g")
+	.attr("class", "slices");
+svg.append("g")
+	.attr("class", "labels");
+svg.append("g")
+	.attr("class", "lines");
+
+var width = 960,
+    height = 450,
+	radius = Math.min(width, height) / 2;
+
+var pie = d3.layout.pie()
+	.sort(null)
+	.value(function(d) {
+		return d.value;
+	});
+
+var arc = d3.svg.arc()
+	.outerRadius(radius * 0.8)
+	.innerRadius(radius * 0.4);
+
+var outerArc = d3.svg.arc()
+	.innerRadius(radius * 0.9)
+	.outerRadius(radius * 0.9);
+
+svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var key = function(d){ return d.data.label; };
+
+var count=-1;
+var aa=1;
+var bb=0;
+var cc=0
+var coloraa = d3.scale.ordinal()
+	.domain(["None 1%","Independent 19%","Reliance Entertainment 1%","Lionsgate 3%","DreamWorks Pictures 1%","Summit Entertainment 1%","Legendary Pictures 1%","Vertigo Entertainment 1%","Columbia 1%","The Weinstein Company 2%","Relativity Media 7%","Happy Madison 2%","Virgin 1%","Weinstein Company 5%","Warner Bros 13%","Aardman Animations 1%","CBS Films 1%","Disney 4%","Pixar 1%","20th Century Fox 6%","Regency Enterprises 1%","Sony 6%","Universal 5%","Miramax Films 1%","Morgan Creek Productions 1%","New Line Cinema 1%","Spyglass Entertainment 2%","DreamWorks 4%","Village Roadshow Pictures 1%","Paramount 5%"])
+	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#7b6888"]);
+var zaa=[1,19,1,3,1,1,1,1,1,2,7,2,1,5,13,1,1,4,1,6,1,6,5,1,1,1,2,4,1,5];
+var colorbb = d3.scale.ordinal()
+	.domain(["None 5%","Comedy 10%","Discovery 5%","Sacrifice 2%","Journey and Return 2%","Love 10%","Maturation 3%","Tragedy 1%","Temptation 3%","Monster Force 13%","Metamorphosis 3%","Rivalry 7%","Fish Out Of Water 3%","Revenge 4%","The Riddle 4%","Wretched Excess 3%","Underdog 3%","Pursuit 2%","Escape 3%","Rescue 2%","Transformation 2%","Quest 9%"])
+	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#7b6888"]);
+var zbb=[5,10,5,2,2,10,3,1,3,13,3,7,3,4,4,3,3,2,3,2,2,9];
+var colorcc = d3.scale.ordinal()
+	.domain(["Comedy 17.34%","Drama 14.29%","Adventure 10.2%","Action 24.5%","Fantasy 2%","Horror 10.2%","Animation 10.2%","Romance 10.2%","Thriller 7%"])
+	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+var zcc=[17,14,1,24,2,13,10,10,7];
+var color=coloraa;
+function randomData (){
+        var labels = coloraa.domain();
+        if(bb==1)
+	    labels = colorbb.domain();
+        if(cc==1)
+	    labels = colorcc.domain();
+	return labels.map(function(label){
+                count=count+1;
+                if(aa==1)
+		   return { label: label, value: zaa[count] }
+                if(bb==1)
+		   return { label: label, value: zbb[count] }
+                if(cc==1)
+		   return { label: label, value: zcc[count] }
+	});
+}
+
+d3.select(".aa")
+	.on("click", function(){
+                count=-1;
+                aa=1;
+                bb=0;
+                cc=0;
+		change(randomData());
+	});
+d3.select(".bb")
+	.on("click", function(){
+                count=-1;
+                aa=0;
+                bb=1;
+                cc=0
+		change(randomData());
+	});
+d3.select(".cc")
+	.on("click", function(){
+                count=-1;
+                aa=0;
+                bb=0;
+                cc=1
+		change(randomData());
+	});
+
+function change(data) {
+       if(aa==1)
+	   color=coloraa;
+       if(bb==1)
+	   color=colorbb;
+       if(cc==1)
+	   color=colorcc;
+
+	/* ------- PIE SLICES -------*/
+	var slice = svg.select(".slices").selectAll("path.slice")
+		.data(pie(data), key);
+
+	slice.enter()
+		.insert("path")
+		.style("fill", function(d) { return color(d.data.label); })
+		.attr("class", "slice");
+
+	slice		
+		.transition().duration(1000)
+		.attrTween("d", function(d) {
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				return arc(interpolate(t));
+			};
+		})
+
+	slice.exit()
+		.remove();
+
+	/* ------- TEXT LABELS -------*/
+
+	var text = svg.select(".labels").selectAll("text")
+		.data(pie(data), key);
+
+	text.enter()
+		.append("text")
+		.attr("dy", ".35em")
+		.text(function(d) {
+			return d.data.label;
+		});
+	
+	function midAngle(d){
+		return d.startAngle + (d.endAngle - d.startAngle)/2;
+	}
+
+	text.transition().duration(1000)
+		.attrTween("transform", function(d) {
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+				return "translate("+ pos +")";
+			};
+		})
+		.styleTween("text-anchor", function(d){
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				return midAngle(d2) < Math.PI ? "start":"end";
+			};
+		});
+
+	text.exit()
+		.remove();
+
+	/* ------- SLICE TO TEXT POLYLINES -------*/
+
+	var polyline = svg.select(".lines").selectAll("polyline")
+		.data(pie(data), key);
+	
+	polyline.enter()
+		.append("polyline");
+
+	polyline.transition().duration(1000)
+		.attrTween("points", function(d){
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+				return [arc.centroid(d2), outerArc.centroid(d2), pos];
+			};			
+		});
+	
+	polyline.exit()
+		.remove();
+};
+
+</script>
+<FONT SIZE=5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Please click button to choose the Chart!</br></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影信息表格进行处理，对电影的内容类型进行统计，得到各个电影内容类型所占份额，由图可得，电影的内容共有21种类型，数据较为集中，好莱坞最获益的电影内容主要是Monster Force，有13电影，占到13.00%，其次是喜剧和爱情剧，二者加起来有21部电影，占到21%，Tragedy只有1部很少；有5部电影这项数据不存在，这也说明了当下美国和世界的主流文化，Monster Force大受人们欢迎，对以后导演拍摄影片具有指导意义。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影信息表格进行处理，对好莱坞最获益的电影的主要上映方进行统计，得到好莱坞电影上映方的份额，由图可得，好莱坞电影的上映方共有29个，数据很分散，好莱坞最获益的电影的上映方是Independent，有19部电影，占到19.19%，其次是Warner Bros，有13部电影，占到13.13%，最少的只有1部；Disney只有4部占4.04%；有1部电影这项数据不存在。这说明了好莱坞电影上映方也是各自分得一部分市场，没有一家垄断。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影信息表格进行处理，对电影的体裁进行统计，得到各个电影体裁类型所占份额，由图可得，电影的体裁简单分为9种类型，数据较为集中，好莱坞最获益的电影体裁主要是动作片，有17部电影，占到17%，其次是喜剧和恐怖剧，有1部电影这项数据不存在，这也说明了当下美国和世界的主流文化，动作片大受人们欢迎，对以后导演拍摄影片具有指导意义。<br><br><br>
+</body>

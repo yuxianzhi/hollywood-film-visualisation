@@ -1,0 +1,74 @@
+#backboard {
+	height: 450px;
+	margin-top: 140px;
+	background-color: #ddd;
+}
+
+#maincontent {
+	width: 1000px;
+	height: 420px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 15px;
+}
+
+#leftcontent {
+	float: left;
+	width: 268px;
+	height: 367px;
+	background-image: url(../image/hollywood.jpg);
+	border-radius: 20px;
+}
+
+#rightcontent {
+	float: right;
+	width: 540px;
+	height: 420px;
+	padding: 10px;
+}
+
+#rightcontent p{
+	font-size: 14px;
+}
+
+#rightcontent a:link {
+	color:#3333FF;
+    text-decoration:none;
+}
+
+#rightcontent a:visited {
+    color:#3333FF;
+    text-decoration:none;
+}
+    
+#rightcontent a:hover {
+    color:#330099;
+    text-decoration:underline;
+    }
+    
+#rightcontent a:active {
+    color:#3333FF;
+    text-decoration:none;
+}
+
+#rightcontent #enter{
+	text-align:center;
+}
+
+#rightcontent #author{
+	text-align: right;
+}
+
+
+#bottom {
+	width: 	1000px;
+	height: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#bottom p {
+	font-size: 12px;
+	text-align: center;
+}
+

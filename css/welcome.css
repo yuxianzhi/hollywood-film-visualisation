@@ -1,0 +1,59 @@
+BODY
+{
+    FONT-SIZE: 9pt
+}
+P
+{
+    FONT-SIZE: 9pt
+}
+TD
+{
+    FONT-SIZE: 9pt
+}
+A:link
+{
+    FONT-SIZE: 9pt;
+    COLOR: #000000;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    FONT-SIZE: 9pt;
+    COLOR: #000000;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    FONT-SIZE: 9pt;
+    COLOR: #990066;
+    TEXT-DECORATION: underline
+}
+DIV
+{
+    FONT-SIZE: 9pt
+}
+TBODY
+{
+    FONT-SIZE: 9pt
+}
+MARQUEE
+{
+    FONT-SIZE: 9pt
+}
+.inputno {  font-size: 9pt; height: 18px; width: 172px; border-color: #A15677 #FEE9F2 #FEE9F2 #A15677; color: #B14E79; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.submitno1 {  background-image: url(images/login_07.gif); background-position: center center; height: 19px; width: 62px; border-style: none; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.submitno2 {  background-image: url(images/login_08.gif); background-position: center center; height: 19px; width: 62px; border-style: none; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.submitno3 {  background-image: url(images/login_10.gif); background-position: center center; height: 19px; width: 62px; border-style: none; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.bj {  background-image: url(images/bj.jpg); background-position: right bottom; background-repeat: no-repeat}
+.input1 {  font-size: 9pt; color: #333333; background-color: #E8E8E8; height: 18px; border-color: #F3F3F3 #999999 #999999 #F3F3F3; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.table_biankuan {  border: #833F91; border-style: solid; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px}
+.table_biaogexian {  border:1px #FFFFFF solid}
+.td_hz_bj {  background-color: #E2D8EF; border: #FFFFFF solid; border-width: 1px 1px 0px}
+.td_biaogexian {  border:#FFFFFF solid; background-color: #F7F7F7; border-width: 1px 1px 0px}
+.td_sz_bj {  background-color: #C3AFDE}
+.td_bt_bj {  background-color: #9259B0; font-size: 12px; font-weight: bolder; color: #FFFFFF}
+.font_bt_hc {  font-size: 12px; font-weight: bolder; color: #FF0000}
+.td_xian_sz_bj {  background-color: #C3AFDE; border: #FFFFFF solid; border-width: 1px 1px 0px}
+.font_bt_sz {  font-size: 12px; font-weight: bolder; color: #5A4674}
+
+

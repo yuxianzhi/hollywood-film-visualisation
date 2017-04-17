@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ccc;
+  stroke-opacity: .4;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: steelblue;
+  stroke-opacity: .7;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line, .axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff;
+}
+
+</style>
+
+<title>
+The analysis of Most Profitable Hollywood Stories - US 2011(1)
+</title>
+<body>
+<div id="c" style="float:left;">
+ <div id="a" style="float:left; height:1px;width:1080px">
+<script src="../../d3/d3.js"></script>
+<script src="../../d3/d3.min.js"></script>
+<script>
+
+var m = [30, 10, 10, 10],
+    w = 750 - m[1] - m[3],
+    h = 700 - m[0] - m[2];
+
+var x = d3.scale.ordinal().rangePoints([0, w], .5),
+    y = {};
+
+var line = d3.svg.line(),
+    axis = d3.svg.axis().orient("left"),
+    background,
+    foreground;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.csv("movie.csv", function(cities) {
+
+  // Extract the list of dimensions and create a scale for each.
+  x.domain(dimensions = d3.keys(cities[0]).filter(function(d) {
+    return d != "Film" && (y[d] = d3.scale.linear()
+        .domain(d3.extent(cities, function(p) { return +p[d]; }))
+        .range([h, 0]));
+  }));
+
+  // Add grey background lines for context.
+  background = svg.append("g")
+      .attr("class", "background")
+    .selectAll("path")
+      .data(cities)
+    .enter().append("path")
+      .attr("d", path);
+
+  // Add blue foreground lines for focus.
+  foreground = svg.append("g")
+      .attr("class", "foreground")
+    .selectAll("path")
+      .data(cities)
+    .enter().append("path")
+      .attr("d", path);
+
+  // Add a group element for each dimension.
+  var g = svg.selectAll(".dimension")
+      .data(dimensions)
+    .enter().append("g")
+      .attr("class", "dimension")
+      .attr("transform", function(d) { return "translate(" + x(d) + ")"; });
+
+  // Add an axis and title.
+  g.append("g")
+      .attr("class", "axis")
+      .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+    .append("text")
+      .attr("text-anchor", "middle")
+      .attr("y", -9)
+      .text(String);
+
+  // Add and store a brush for each axis.
+  g.append("g")
+      .attr("class", "brush")
+      .each(function(d) { d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d]).on("brush", brush)); })
+    .selectAll("rect")
+      .attr("x", -8)
+      .attr("width", 16);
+});
+
+// Returns the path for a given data point.
+function path(d) {
+  return line(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
+}
+
+// Handles a brush event, toggling the display of foreground lines.
+function brush() {
+  var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
+      extents = actives.map(function(p) { return y[p].brush.extent(); });
+  foreground.style("display", function(d) {
+    return actives.every(function(p, i) {
+      return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+    }) ? null : "none";
+  });
+}
+
+</script>
+</div>
+ <div id="b" style="float:right; height:60px;width:350px"></br></br></br></br>
+       <FONT SIZE=1>30 Minutes or Less,50/50,A Dangerous Method,A Very Harold and Kumar Christmas,Abduction,Albert Nobbs,Anonymous,Another Earth</br></FONT></br>
+       <FONT SIZE=1>Apollo 18,Arthur,Arthur Christmas,Average,Bad Teacher,Battle: Los Angeles,Beastly,Beginners,Bridesmaids, Captain America:The First Avenger</br></FONT></br>
+       <FONT SIZE=1>Cars 2,Cedar Rapids,Colombiana,Conan the Barbarian,Contagion,Cowboys and Aliens,Crazy, Stupid, Love,Diary of a Wimpy Kid 2: Rodrick Rules,Dolphin Tale,Don't Be Afraid Of The Dark</br></FONT>
+       <FONT SIZE=1>Dream House,Drive,Drive Angry,Dylan Dog: Dead of Night,Everything Must Go,Extremely Loud and Incredibly Close,Fast Five,Final Destination 5,Footloose,Friends With Benefits</br></FONT>
+       <FONT SIZE=1>Fright Night,Gnomeo and Juliet,Green Lantern,Hall Pass,Hanna,Happy Feet 2,Harry Potter and the Deathly Hallows Part 2,Hesher,Hop,Horrible Bosses</br></FONT>
+       <FONT SIZE=1>Hugo,   I Am Number Four,   Immortals,   In Time,   Insidious,   J.Edgar,   Jack and Jill,   Jane Eyre,   Johnny English Reborn,   Just Go With It </br></FONT></br></br>
+       <FONT SIZE=1>Killer Elite,Kung Fu Panda 2,Larry Crowne,Limitless,Machine Gun Preacher,Margin Call,Mars Needs Moms,Midnight in Paris,Mission Impossible 4,Moneyball</br></FONT>
+       <FONT SIZE=1>Monte Carlo,Mr. Popper's Penguins,My Week with Marilyn,Never Back Down 2: The Beatdown,New Year's Eve,No Strings Attached,One Day,Our Idiot Brother,Paranormal Activity 3,Paul</br></br></FONT>
+       <FONT SIZE=1>"Pirates of the Caribbean:
+On Stranger Tides",Priest,Puss In Boots,Rango,Real Steel,Red Riding Hood,Red State,Rio,Rise of the Planet of the Apes,Sanctum</br></FONT>
+       <FONT SIZE=1>Scream 4,Season Of The Witch,Shame,Shark Night 3D,Sherlock Holmes 2,Something Borrowed,Soul Surfer,Source Code,Spy Kids: All The Time in the World,Sucker Punch</br></FONT>
+       <FONT SIZE=1>Super 8</br></FONT>
+  </div>
+</div>
+<div id="bottom" style="height:330px;border:1px solid #ccc;padding:10px;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平行坐标是一种通常的可视化方法， 用于对高维几何和多元数据的可视化。为了表示在高维空间的一个点集， 在N条平行的线的背景下，（一般这N条线都竖直且等距），一个在高维空间的点被表示为一条拐点在N条平行坐标轴的折线，在第K个坐标轴上的位置就表示这个点在第K个维的值。平行坐标是信息可视化的一种重要技术。 为了克服传统的笛卡尔直角坐标系容易耗尽空间、 难以表达三维以上数据的问题， 平行坐标将高维数据的各个变量用一系列相互平行的坐标轴表示， 变量值对应轴上位置。 为了反映变化趋势和各个变量间相互关系，往往将描述不同变量的各点连接成折线。所以平行坐标图的实质是将多维欧式空间的一个点Xi(xi1,xi2,...,xim) 映射到二维平面上的一条曲线。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用平行坐标可视化方法对好莱坞最获益的电影进行分析，图中对好莱坞最获益的电影的第三方评价、估算、观众评价、全美影院平均票房、放映影院、国内票房、国外票房、总票房、收益率和上映周末数进行统计，最右边是相应的电影名称，为了便于分析，对电影进行编号（0-98）。<br>
+图中简单直观的传递出一个信息：好的电影第三方评价一定很高，估算较低，观众评价较高，国内票房、国外票房、总票房较高，收益率较低。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由图对好莱坞最获益的电影的国内票房、国外票房和全球票房的统计信息可得，电影票房数据差异很大，有的电影票房很高，有的电影票房很低，国内受欢迎的电影，国际上也受欢迎，电影《Harry Potter and the Deathly Hallows Part 2》的国内票房和国际票房都是最高，国内票房高达381.01，国际票房高达1,328.11，受到国际好评；电影《Hesher》的电影票房最小，都是0.38，可能是因为播放时间不长，没有达到票房高峰期；电影《Never Back Down 2: The Beatdown》票房数据没有，可能是因为还没上映。由图中对好莱坞最获益的电影的放映影院、估算和观众评价的统计信息可得，电影《Harry Potter and the Deathly Hallows Part 2》的上映影院数最多达到4375，最少为电影《Beginners》只有5个，可能是因为刚上映不久，影片宣传较差，有几部电影这项数据空缺，收集数据并不是很全；电影的预算各不相同，有高有低，电影《Pirates of the Caribbean: On Stranger Tides》预算最高为250，最低的是电影《Another Earth》，只有0.3；好莱坞电影总体上来说受到观众好评，电影《50/50》最受好评，占到观看观众的93%，其次是《《Harry Potter and the Deathly Hallows Part 2》占到观看观众的92%，这两部电影也许是好莱坞电影2011年最受欢迎的电影。
+</div>
+</body>

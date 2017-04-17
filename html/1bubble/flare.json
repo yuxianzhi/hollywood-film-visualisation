@@ -1,0 +1,314 @@
+{
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [
+    {
+     "name": "Action",
+     "children": [
+{"name":"Abduction","size":2345},
+{"name":"Battle:LosAngeles","size":3026},
+{"name":"CaptainAmerica:TheFirstAvenger","size":2632},
+{"name":"Colombiana","size":1524},
+{"name":"ConantheBarbarian","size":542},
+{"name":"CowboysandAliens","size":1073},
+{"name":"DriveAngry","size":643},
+{"name":"FastFive","size":5009},
+{"name":"GreenLantern","size":1099},
+{"name":"Hanna","size":2126},
+{"name":"Immortals","size":2433},
+{"name":"KillerElite","size":757},
+{"name":"MachineGunPreacher","size":37},
+{"name":"MissionImpossible4","size":4750},
+{"name":"NeverBackDown2:TheBeatdown","size":0},
+{"name":"PiratesoftheCaribbean","size":4176},
+{"name":"Priest","size":1305},
+{"name":"RealSteel","size":2453},
+{"name":"RiseofthePlanetoftheApes","size":5175},
+{"name":"Sanctum","size":3620},
+{"name":"SeasonOfTheWitch","size":2290},
+{"name":"SherlockHolmes2","size":4176},
+{"name":"SpyKids","size":2744},
+{"name":"SuckerPunch","size":1095}
+	]
+    },
+
+	  
+   
+    {
+     "name": "optimization",
+     "children": [
+      {"name": "Hugo", "size": 645}
+     ]
+    }
+   ]
+  },
+  {
+   "name": "animate",
+   "children": [
+   
+    {
+     "name": "interpolate",
+     "children": [
+     {"name":"Arthur Christmas","size":983},
+{"name":"Cars 2","size":2759},
+{"name":"Gnomeo and Juliet","size":5388},
+{"name":"Happy Feet 2","size":789},
+{"name":"Hop","size":2920},
+{"name":"Hugo","size":645},
+{"name":"Kung Fu Panda 2","size":4420},
+{"name":"Mars Needs Moms","size":260},
+{"name":"Puss In Boots","size":4017},
+{"name":"Rango","size":1816},
+{"name":"Rio","size":5385}
+     ]
+    },
+    {"name": "ISchedulable", "size": 0},
+    {"name": "Parallel", "size": 0},
+    {"name": "Pause", "size": 0},
+
+    {"name": "Tween", "size": 0}
+   ]
+  },
+  {
+   "name": "data",
+   "children": [
+    {
+     "name": "converters",
+     "children": [
+      {"name": "Converters", "size": 0},
+      {"name": "DelimitedTextConverter", "size": 0},
+      {"name": "GraphMLConverter", "size": 0},
+      {"name": "IDataConverter", "size":0},
+      {"name": "JSONConverter", "size": 0}
+     ]
+    },
+    {"name": "DataField", "size": 0},
+    {"name": "DataSchema", "size": 0},
+    {"name": "DataSet", "size": 0},
+    {"name": "DataSource", "size": 0},
+    {"name": "DataTable", "size": 0},
+    {"name": "DataUtil", "size": 0}
+   ]
+  },
+  {
+   "name": "display",
+   "children": [
+  {"name":"30 Minutes or Less","size":1448},
+{"name":"50/50","size":4564},
+{"name":"A Very Harold and Kumar Christmas","size":1792},
+{"name":"Arthur","size":1143},
+{"name":"Bad Teacher","size":10810},
+{"name":"Beginners","size":4472},
+{"name":"Bridesmaids","size":8873},
+{"name":"Cedar Rapids","size":686},
+{"name":"Diary of a Wimpy Kid 2: Rodrick Rules","size":3448},
+{"name":"Hall Pass","size":2310},
+{"name":"Horrible Bosses","size":5990},
+{"name":"Jack and Jill","size":1581},
+{"name":"Johnny English Reborn","size":3510},
+{"name":"Mr. Popper's Penguins","size":3407},
+{"name":"No Strings Attached","size":5908},
+{"name":"Our Idiot Brother","size":4963},
+{"name":"Paul","size":2450}
+
+   ]
+  },
+  {
+   "name": "flex",
+   "children": [
+ 
+   ]
+  },
+  {
+   "name": "physics",
+   "children": [
+
+   ]
+  },
+  {
+   "name": "query",
+   "children": [
+
+    {
+     "name": "methods",
+     "children": [
+     
+     ]
+    },
+    {"name": "Minimum", "size": 0}
+   ]
+  },
+  {
+   "name": "scale",
+   "children": [
+{"name":"A Dangerous Method","size":449},
+{"name":"Albert Nobbs","size":344},
+{"name":"Anonymous","size":473},
+{"name":"Dolphin Tale","size":2377},
+{"name":"Everything Must Go","size":542},
+{"name":"Extremely Loud and Incredibly Close","size":1150},
+{"name":"Footloose","size":2586},
+{"name":"Hesher","size":55},
+{"name":"J.Edgar","size":2091},
+{"name":"Larry Crowne","size":1747},
+{"name":"Moneyball","size":2162},
+{"name":"My Week with Marilyn","size":826},
+{"name":"Shame","size":2148},
+{"name":"Soul Surfer","size":2459}
+
+
+   ]
+  },
+  {
+   "name": "util",
+   "children": [
+
+    {
+     "name": "heap",
+     "children": [
+    
+     ]
+    },
+   
+    {
+     "name": "math",
+     "children": [
+  
+     ]
+    },
+   
+    {
+     "name": "palette",
+     "children": [
+
+      {"name": "SizePalette", "size": 0}
+     ]
+    },
+    {"name": "Another Earth", "size": 8855},
+    {"name": "Harry Potter and the Deathly Hallows Part2", "size": 10625}
+   ]
+  },
+  {
+   "name": "vis",
+   "children": [
+    {
+     "name": "axis",
+     "children": [
+      {"name": "Axes", "size": 0}
+     ]
+    },
+    {
+     "name": "controls",
+     "children": [
+
+      {"name":"Apollo 18","size":5112},
+{"name":"Don't Be Afraid Of The Dark","size":1262},
+{"name":"Dream House","size":770},
+{"name":"Dylan Dog: Dead of Night","size":232},
+{"name":"Final Destination 5","size":3947},
+{"name":"Fright Night","size":1237},
+{"name":"Insidious","size":64673},
+{"name":"Paranormal Activity 3","size":40379},
+{"name":"Red Riding Hood","size":2123},
+{"name":"Red State","size":276},
+{"name":"Scream 4","size":2428},
+{"name":"Shark Night 3D","size":1548},
+{"name":"Super 8 ","size":5194}
+
+     ]
+    },
+    {
+     "name": "data",
+     "children": [
+
+      {
+       "name": "render",
+       "children": [
+     
+        {"name": "ShapeRenderer", "size": 0}
+       ]
+      },
+ 
+      {"name": "TreeBuilder", "size":0}
+     ]
+    },
+    {
+     "name": "events",
+     "children": [
+    
+      {"name": "VisualizationEvent", "size": 0}
+     ]
+    },
+    {
+     "name": "legend",
+     "children": [
+     {"name":"Beastly","size":1696},
+{"name":"Crazy, Stupid, Love","size":2857},
+{"name":"Friends With Benefits","size":4273},
+{"name":"Jane Eyre","size":0},
+{"name":"Just Go With It","size":2687},
+{"name":"Midnight in Paris","size":8745},
+{"name":"Monte Carlo","size":1983},
+{"name":"New Year's Eve","size":2536},
+{"name":"One Day","size":3683},
+{"name":"Something Borrowed","size":1720}
+
+     ]
+    },
+    {
+     "name": "operator",
+     "children": [
+      {
+       "name": "distortion",
+       "children": [
+  {"name":"Contagion","size":2963},
+{"name":"Drive","size":2258},
+{"name":"I Am Number Four","size":4467},
+{"name":"In Time","size":2408},
+{"name":"Limitless","size":3185},
+{"name":"Margin Call","size":5994},
+{"name":"Source Code","size":2534},
+{"name":"New Year's Eve","size":3852}
+
+       ]
+      },
+      {
+       "name": "encoder",
+       "children": [
+ 
+        {"name": "SizeEncoder", "size": 0}
+       ]
+      },
+      {
+       "name": "filter",
+       "children": [
+
+        {"name": "VisibilityFilter", "size": 0}
+       ]
+      },
+  
+      {
+       "name": "label",
+       "children": [
+
+        {"name": "StackedAreaLabeler", "size":0}
+       ]
+      },
+      {
+       "name": "layout",
+       "children": [
+      
+        {"name": "TreeMapLayout", "size": 0}
+       ]
+      },
+
+      {"name": "SortOperator", "size": 0}
+     ]
+    },
+    {"name": "Visualization", "size": 0}
+   ]
+  }
+ ]
+}

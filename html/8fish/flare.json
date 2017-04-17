@@ -1,0 +1,23 @@
+{
+	"name":"dd",
+	"children": [
+	{
+		"name": "cluster",
+		"children": [
+			{"name": "AgglomerativeCluster", "size": 100},
+			{"name": "CommunityStructure", "size": 100},
+			{"name": "HierarchicalCluster", "size": 100},
+			{"name": "MergeEdge", "size": 100}
+		]
+    },
+	{
+		"name": "cl",
+		"children": [
+			{"name": "AgglomerativeCluster", "size": 100},
+			{"name": "CommunityStructure", "size": 100},
+			{"name": "HierarchicalCluster", "size": 100},
+			{"name": "MergeEdge", "size": 100}
+		]
+    }
+	]
+}

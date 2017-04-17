@@ -1,0 +1,366 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+
+<body>
+    <!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+    <!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+    <div id="main" style="height:230px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main4" style="height:230px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main2" style="height:230px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main3" style="height:210px;border:1px solid #ccc;padding:10px;"></div>
+    <div id="main5" style="height:210px;border:1px solid #ccc;padding:10px;">
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对好莱坞最获益的电影的国内票房、全球票房、放映影院、估算和观众评价进行统计，采用多图联动来更好地表达信息，对原始数据给出了一个直观表示，横坐标是电影名称，纵坐标是电影的票房、放映影院、估算和观众评价。<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由好莱坞最获益的电影的国内票房和全球票房的统计信息可得，电影票房数据差异很大，有的电影票房很高，有的电影票房很低，国内受欢迎的电影，国际上也受欢迎，电影《Harry Potter and the Deathly Hallows Part 2》的国内票房和国际票房都是最高，国内票房高达381.01，国际票房高达1,328.11，受到国际好评；电影《Hesher》的电影票房最小，都是0.38，可能是因为播放时间不长，没有达到票房高峰期；电影《Never Back Down 2: The Beatdown》票房数据没有，可能是因为还没上映。<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由好莱坞最获益的电影的放映影院、估算和观众评价的统计信息可得，电影《Harry Potter and the Deathly Hallows Part 2》的上映影院数最多达到4375，最少为电影《Beginners》只有5个，可能是因为刚上映不久，影片宣传较差，有几部电影这项数据空缺，收集数据并不是很全；电影的预算各不相同，有高有低，电影《Pirates of the Caribbean: On Stranger Tides》预算最高为250，最低的是电影《Another Earth》，只有0.3；好莱坞电影总体上来说受到观众好评，电影《50/50》最受好评，占到观看观众的93%，其次是《《Harry Potter and the Deathly Hallows Part 2》占到观看观众的92%，这两部电影也许是好莱坞电影2011年最受欢迎的电影。</p>
+    </div>
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="../../echart/echarts.js"></script>
+    
+    <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '../../echart'
+        }
+    });
+    
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/pie',
+	    'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            //--- 折柱 ---
+
+            var axisData = [
+    "30 Minutes or Less","50/50","A Dangerous Method","A Very Harold and Kumar Christmas","Abduction","Albert Nobbs","Anonymous","Another Earth","Apollo 18","Arthur","Arthur Christmas","Average","Bad Teacher","Battle: Los Angeles","Beastly","Beginners","Bridesmaids","Captain America: The First Avenger","Cars 2","Cedar Rapids","Colombiana","Conan the Barbarian","Contagion","Cowboys and Aliens","Crazy, Stupid, Love","Diary of a Wimpy Kid 2: Rodrick Rules","Dolphin Tale","Don't Be Afraid Of The Dark","Dream House","Drive","Drive Angry","Dylan Dog: Dead of Night","Everything Must Go","Extremely Loud and Incredibly Close","Fast Five","Final Destination 5","Footloose","Friends With Benefits","Fright Night","Gnomeo and Juliet","Green Lantern","Hall Pass","Hanna","Happy Feet 2","Harry Potter and the Deathly Hallows Part 2","Hesher","Hop","Horrible Bosses","Hugo","I Am Number Four","Immortals","In Time","Insidious","J.Edgar","Jack and Jill","Jane Eyre","Johnny English Reborn","Just Go With It","Killer Elite","Kung Fu Panda 2","Larry Crowne","Limitless","Machine Gun Preacher","Margin Call","Mars Needs Moms","Midnight in Paris","Mission Impossible 4","Moneyball","Monte Carlo","Mr. Popper's Penguins","My Week with Marilyn","Never Back Down 2: The Beatdown","New Year's Eve","No Strings Attached","One Day","Our Idiot Brother","Paranormal Activity 3","Paul","Pirates of the Caribbean:","On Stranger Tides","Priest","Puss In Boots","Rango","Real Steel","Red Riding Hood","Red State","Rio","Rise of the Planet of the Apes","Sanctum","Scream 4","Season Of The Witch","Shame","Shark Night 3D","Sherlock Holmes 2","Something Borrowed","Soul Surfer","Source Code","Spy Kids: All The Time in the World","Sucker Punch","Super 8 "
+];
+
+            var option = {
+   title : {
+        text: 'Most Profitable Hollywood Stories - US 2011'
+    },
+    tooltip : {
+        trigger: 'axis',
+        showDelay: 0,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+        
+    },
+    legend: {
+        data:['Domestic Gross','Worldwide Gross']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    grid: {
+        x: 80,
+        y: 40,
+        x2:20,
+        y2:25
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : true,
+            axisTick: {onGap:false},
+            splitLine: {show:false},
+            data : axisData
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            scale:true,
+            boundaryGap: [0, 0.05],
+            splitArea : {show : true}
+        }
+    ],
+    series : [  
+        {
+            name:'Domestic Gross',
+            type:'line',
+            stack: '总量',
+            data:[37.05,34.9,0.54,34.04,28.07,2.75,4.46,1.32,17.69,33.04,46.46,66,100.29,83.55,27.87,5.79,169.11,176.65,191.45,6.86,36.67,21.3,75.66,100.24,84.34,52.7,71.08,24.05,21.3,34.68,10.72,1.19,2.71,31.59,209.83,42.59,51.16,55.8,18.3,99.97,116.6,45.06,40.26,57.31,381.01,0.38,108.09,117.54,62.08,55.1,80.49,36.49,54.01,37.39,73.83,11.24,8.31,103.03,25.12,165.25,35.61,79.25,0.54,4.94,21.39,56.8,208.38,75.6,23.18,68.22,5.31, ,54.54,70.6,13.84,24.82,103.66,37.41,241.07,29.14,148.76,123.26,83.61,37.66,1.1,143.62,176.7,23.2,38.18,24.8,3.87,18.88,186.36,39.05,43.85,54.71,38.54,36.39,127
+                  ]
+        },
+        {
+            name:'Worldwide Gross',
+            type:'line',
+            stack: '总量',
+            data:[40.55,36.51,8.97,34.04,82.07,2.75,14.19,1.77,25.56,45.74,147.41,163,216.2,211.82,28.83,14.31,288.38,368.4,551.85,6.86,60.97,48.8,135.46,174.82,142.84,72.42,87.95,31.55,38.5,67.01,28.93,4.63,2.71,45.99,626.13,157.89,62.05,149.54,37.1,193.97,219.85,83.16,63.78,106.51,1328.11,0.38,183.95,209.64,96.68,144.5,182.49,127.39,97.01,73.19,124.93,30.15,157.94,214.95,52.96,663.02,52.41,161.85,1.1,8.87,38.99,148.66,688.78,108.1,39.66,187.36,8.26, ,142.04,147.7,55.24,24.82,201.9,97.98,1043.87,78.31,522.26,245.15,269.81,89.16,1.1,484.63,481.23,108.6,97.14,91.6,13.96,38.7,521.96,60.18,44.27,123.28,74.08,89.79,259.71
+              ]
+        }
+    ]
+};
+var myChart = ec.init(document.getElementById('main'));
+// 为echarts对象加载数据 
+myChart.setOption(option); 
+            
+           
+
+
+var option4 = {
+    tooltip : {
+        trigger: 'axis',
+        showDelay: 0,             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+        
+    },
+    legend: {
+        data:['Number of Theatres','Budget','Audience  score %']
+    },
+    toolbox: {
+        y : -30,
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataZoom : {show: true},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    grid: {
+        x: 80,
+        y: 40,
+        x2:20,
+        y2:25
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : true,
+            axisTick: {onGap:false},
+            splitLine: {show:false},
+            data : axisData
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            scale:true,
+            boundaryGap: [0, 0.05],
+            splitArea : {show : true}
+        }
+    ],
+    series : [
+        {
+            name:'Number of Theatres',
+            type:'line',
+            data:[ 
+               2888,2458, ,2875,3118,245,265, ,3328,3276,3376,2690,3049,3417,1952,5,2918,3715,4115,15,2614,3015,3222,3750,3020,3167,3507,2760,2661,2886,2290, ,218,2630,3644,3155,3549,2926,3114,2994,3816,2950,2535,3606,4375, ,3579,3040,1277,3154,3112,3122,2408,1910,3438, ,1552,3548,2986,3925,2973,2756, , ,3117,944,3448,2993,2473,3339,247, ,3505,3018,1719,2555,3321,2802,4155,2864,3952,3917,3440,3030, ,3826,3648,2787,3305,2816,10,2806,3703,2904,2214,2961,3295,3033,3379
+            ]
+        },
+        
+        
+    ]
+};
+var myChart4 = ec.init(document.getElementById('main4'));
+myChart4.setOption(option4);
+
+var 	option2 = {
+    tooltip : {
+        trigger: 'axis',
+        showDelay: 0             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+    },
+    legend: {
+        y : -30,
+        data:['Number of Theatres','Budget','Audience  score %']
+    },
+    toolbox: {
+        y : -30,
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataZoom : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    grid: {
+        x: 80,
+        y:5,
+        x2:20,
+        y2:40
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : true,
+            axisTick: {onGap:false},
+            splitLine: {show:false},
+            data : axisData
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            scale:true,
+            boundaryGap: [0, 0.05],
+            splitArea : {show : true}
+        }
+    ],
+    series : [
+        {
+            name:'Budget',
+            type:'line',
+            symbol: 'none',
+            data:[
+                28,8,20,19,35,8,30,0.2,5,40,150,55,20,70,17,3.2,32.5,140,200,10,40,90,60,163,50,21,37,25,50,15,45,20,5,40,125,40,24,35,30,36,200,36,30,135,125,7,63,35,150,60,75,40,1.5,35,79, ,45,80,70,150,30,27,30,3.5,150,17,145,50,20,55,10,3,56,25,15,5,5,40,250,60,130,135,110,42,4,90,93,30,40,40,6.5,25,125,35,18,32,27,82,50
+            ],
+            markLine : {
+                symbol : 'none',
+                itemStyle : {
+                    normal : {
+                        color:'#1e90ff',
+                        label : {
+                            show:false
+                        }
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        }
+    ]
+};
+var myChart2 = ec.init(document.getElementById('main2'));
+myChart2.setOption(option2);
+
+var option3 = {
+    tooltip : {
+        trigger: 'axis',
+        showDelay: 0             // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+    },
+    legend: {
+        y : -30,
+        data:['Number of Theatres ','Budget','Audience  score %']
+    },
+    toolbox: {
+        y : -30,
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataZoom : {show: true},
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    grid: {
+        x: 80,
+        y:5,
+        x2:20,
+        y2:30
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : true,
+            axisTick: {onGap:false},
+            splitLine: {show:false},
+            data : axisData
+        }
+    ],
+   yAxis : [
+        {
+            type : 'value',
+            scale:true,
+            boundaryGap: [0, 0.05],
+            splitArea : {show : true}
+        }
+    ],
+    series : [
+        {
+            name:'Audience  score %',
+            type:'bar',
+            symbol: 'none',
+            data:[
+              48,93,89,71,46,43,66,74,31,49,82,62,38,50,50,80,77,75,56,61,55,34,63,50,81,63,81,37,38,79,38,28,53,62,83,56,71,68,68,52,48,44,67,59,92,68,50,72,84,57,59,55,65,84,59,77,55,63,48,80,46,73,71,73,43,84,86,89,50,54,84,44,48,57,54,79,58,70,61,37,76,69,81,41,59,73,87,39,57,32,80,25,79, ,79,81,40,48,78,
+            ],
+            markLine : {
+                symbol : 'none',
+                itemStyle : {
+                    normal : {
+                        color:'#1e90ff',
+                        label : {
+                            show:false
+                        }
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        }
+    ]
+};
+var myChart3 = ec.init(document.getElementById('main3'));
+myChart3.setOption(option3);
+
+
+var ecConfig = require('echarts/config');
+myChart.on(ecConfig.EVENT.MAP_SELECTED, function (param){
+    var selected = param.selected;
+    var mapSeries = option.series[0];
+    var data = [];
+    var legendData = [];
+    var name;
+    for (var p = 0, len = mapSeries.data.length; p < len; p++) {
+        name = mapSeries.data[p].name;
+        //mapSeries.data[p].selected = selected[name];
+        if (selected[name]) {
+            data.push({
+                name: name,
+                value: mapSeries.data[p].value
+            });
+            legendData.push(name);
+        }
+    }
+    option.legend.data = legendData;
+    option.series[1].data = data;
+    myChart.setOption(option, true);
+});
+                    
+myChart.connect([myChart2, myChart3, myChart4]);
+myChart2.connect([myChart, myChart3, myChart4]);
+myChart3.connect([myChart, myChart2, myChart4]);
+myChart4.connect([myChart, myChart2, myChart3]);
+
+setTimeout(function (){
+    window.onresize = function () {
+        myChart.resize();
+        myChart2.resize();
+        myChart3.resize();
+        myChart4.resize();
+    }
+},200)
+                    
+        }
+    );
+    </script>
+</body>
+</html>

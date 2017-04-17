@@ -1,0 +1,31 @@
+{  
+"nodes":[    
+{ "name": "Team"     , "image" : "../../image/team.jpg" },  
+{ "name": "YuXianzhi"   , "image" : "../../image/people1.jpg" },   
+{ "name": "LiKun"     , "image" : "../../image/people2.jpg" },   
+{ "name": "YangShitong"   , "image" : "../../image/people3.jpg" },   
+{ "name": "QiuFeng"     , "image" : "../../image/people4.jpg" },   
+{ "name": "WangYongshuai"   , "image" : "../../image/people5.jpg" },   
+{ "name": "visualization"   , "image" : "../../image/work.png" }, 
+{ "name": "visualization"   , "image" : "../../image/work.png" },  
+{ "name": "report"   , "image" : "../../image/work.png" }, 
+{ "name": "report"   , "image" : "../../image/work.png" }, 
+{ "name": "report"   , "image" : "../../image/work.png" }, 
+{ "name": "build website"   , "image" : "../../image/work.png" }, 
+{ "name": "report"   , "image" : "../../image/work.png" }
+],  
+"edges":[  
+{ "source": 0 , "target": 1 ,  "relation":"teamer" },  
+{ "source": 0 , "target": 2 ,  "relation":"teamer" },  
+{ "source": 0 , "target": 3 ,  "relation":"teamer" },  
+{ "source": 0 , "target": 4 ,  "relation":"teamer" },  
+{ "source": 0 , "target": 5 ,  "relation":"teamer" },  
+{ "source": 1 , "target": 6 ,  "relation":"work" },  
+{ "source": 1 , "target": 11 , "relation":"work" },  
+{ "source": 2 , "target": 7 ,  "relation":"work" },  
+{ "source": 2 , "target": 12,  "relation":"work" },  
+{ "source": 3 , "target": 8 ,  "relation":"work" },  
+{ "source": 4 , "target": 9 ,  "relation":"work" },  
+{ "source": 5 , "target": 10 , "relation":"work" }
+]  
+}  
